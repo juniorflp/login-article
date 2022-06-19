@@ -8,6 +8,7 @@ export const AuthProvider = (props) => {
   const [user, setUser] = useState();
   const [article, setArticle] = useState([]);
 
+  // funçao que pega o token checado na api.
   const checkToken = async (token) => {
     const response = await api
       .get("/auth/check", {
@@ -60,11 +61,13 @@ export const AuthProvider = (props) => {
     return response;
   };
 
+  // funçao para sair da aplicação excluit o token do storage
   const handleLogout = () => {
     localStorage.removeItem("token");
     setAuth(false);
   };
 
+  // cria um novo artigo
   const handleCreate = async (title, description, body) => {
     const token = localStorage.getItem("token");
     const response = await api
@@ -92,6 +95,7 @@ export const AuthProvider = (props) => {
     return response;
   };
 
+  //atualiza o artigo criado
   const handleUpdate = async (title, description, body, id) => {
     const token = localStorage.getItem("token");
     const response = await api
@@ -119,6 +123,7 @@ export const AuthProvider = (props) => {
     return response;
   };
 
+  //deleta artigo
   const handleDelete = async (id) => {
     const token = localStorage.getItem("token");
     const response = await api
@@ -136,6 +141,7 @@ export const AuthProvider = (props) => {
     return response;
   };
 
+  //busca todos artigos
   const handleArticlesResult = async () => {
     const token = localStorage.getItem("token");
     const response = await api
@@ -154,6 +160,7 @@ export const AuthProvider = (props) => {
     return response;
   };
 
+  //renderiza os atigos na tela
   useEffect(() => {
     if (auth) {
       handleArticlesResult();

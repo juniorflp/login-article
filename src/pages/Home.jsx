@@ -39,7 +39,9 @@ export default function HomePage() {
   } = UseDataContext();
   const [edit, setEdit] = useState(false);
   const [data, setData] = useState();
+
   const navigate = useNavigate();
+
   async function Deletar(item) {
     const response = await handleDelete(item.id);
 
